@@ -13,6 +13,7 @@ type ElizeCommand struct {
 var Commands = []ElizeCommand{
 	pingCommand,
 	sayCommand,
+	rot13Command,
 }
 
 func GetCommandCreates() (commands []discord.ApplicationCommandCreate) {
