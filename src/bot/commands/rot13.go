@@ -3,8 +3,6 @@ package commands
 import (
 	"github.com/disgoorg/disgo/discord"
 	"github.com/disgoorg/disgo/handler"
-
-	"buffones/elize/cyphers"
 )
 
 var rot13Command = ElizeCommand{
@@ -24,11 +22,5 @@ var rot13Command = ElizeCommand{
 
 func handleRot13(event *handler.CommandEvent) error {
 	data := event.SlashCommandInteractionData()
-	return event.Respond(
-		discord.InteractionResponseTypeCreateMessage,
-		discord.NewMessageCreateBuilder().
-			SetContent(cyphers.NewCaesarString(data.String("message"), 13).Encoded()).
-			SetEphemeral(true).
-			Build(),
-	)
+	return handleCaesar(event, data.String("message"), 13)
 }

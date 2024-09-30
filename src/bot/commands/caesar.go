@@ -29,10 +29,15 @@ var caesarCypherCommand = ElizeCommand{
 
 func handleCaesarCypher(event *handler.CommandEvent) error {
 	data := event.SlashCommandInteractionData()
+	return handleCaesar(event, data.String("message"), data.Int("key"))
+}
+
+func handleCaesar(event *handler.CommandEvent, message string, key int) error {
+	cypheredString := cyphers.NewCaesarString(message, key).Encoded()
 	return event.Respond(
 		discord.InteractionResponseTypeCreateMessage,
 		discord.NewMessageCreateBuilder().
-			SetContent(cyphers.NewCaesarString(data.String("message"), data.Int("key")).Encoded()).
+			SetContent(cypheredString).
 			SetEphemeral(true).
 			Build(),
 	)
