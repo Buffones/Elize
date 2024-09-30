@@ -12,7 +12,7 @@ import (
 	"github.com/disgoorg/disgo/gateway"
 	"github.com/disgoorg/disgo/handler"
 
-	ecommands "buffones/elize/commands"
+	ecommands "buffones/elize/bot/commands"
 )
 
 var token = os.Getenv("TOKEN")
