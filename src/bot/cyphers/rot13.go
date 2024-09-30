@@ -17,12 +17,12 @@ type CaesarString struct {
 
 func (s CaesarString) Encoded() (cypheredString string) {
 	if len(s.encodedString) < len(*s.originalString) {
-		s.encodedString = rot13(*s.originalString, s.key)
+		s.encodedString = caesarCypher(*s.originalString, s.key)
 	}
 	return s.encodedString
 }
 
-func rot13(message string, key rune) string {
+func caesarCypher(message string, key rune) string {
 	cyphered := strings.Builder{}
 	for _, char := range message {
 		if char >= 'a' && char <= 'z' {
@@ -35,10 +35,10 @@ func rot13(message string, key rune) string {
 	return cyphered.String()
 }
 
-func NewCaesarString(str string) CaesarString {
+func NewCaesarString(str string, key int) CaesarString {
 	cs := CaesarString{
 		originalString: &str,
-		key:            rune(13),
+		key:            rune(key),
 	}
 	return cs
 }

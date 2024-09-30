@@ -7,27 +7,32 @@ import (
 	"buffones/elize/cyphers"
 )
 
-var rot13Command = ElizeCommand{
+var caesarCypherCommand = ElizeCommand{
 	Command: discord.SlashCommandCreate{
-		Name:        "rot13",
-		Description: "Caesar cypher your message with a key of 13.",
+		Name:        "caesar",
+		Description: "Caesar cypher your message with any key you want.",
 		Options: []discord.ApplicationCommandOption{
 			discord.ApplicationCommandOptionString{
 				Name:        "message",
 				Description: "The text you want cyphered.",
 				Required:    true,
 			},
+			discord.ApplicationCommandOptionInt{
+				Name:        "key",
+				Description: "How many places would you like to add for each letter?",
+				Required:    true,
+			},
 		},
 	},
-	Handler: handleRot13,
+	Handler: handleCaesarCypher,
 }
 
-func handleRot13(event *handler.CommandEvent) error {
+func handleCaesarCypher(event *handler.CommandEvent) error {
 	data := event.SlashCommandInteractionData()
 	return event.Respond(
 		discord.InteractionResponseTypeCreateMessage,
 		discord.NewMessageCreateBuilder().
-			SetContent(cyphers.NewCaesarString(data.String("message"), 13).Encoded()).
+			SetContent(cyphers.NewCaesarString(data.String("message"), data.Int("key")).Encoded()).
 			SetEphemeral(true).
 			Build(),
 	)

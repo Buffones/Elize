@@ -11,7 +11,7 @@ import (
 var pingCommand = ElizeCommand{
 	Command: discord.SlashCommandCreate{
 		Name:        "ping",
-		Description: "I'll reply with Pong!",
+		Description: "I'll just reply with Pong!",
 	},
 	Handler: handlePing,
 }

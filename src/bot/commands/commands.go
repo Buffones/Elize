@@ -14,6 +14,7 @@ var Commands = []ElizeCommand{
 	pingCommand,
 	sayCommand,
 	rot13Command,
+	caesarCypherCommand,
 }
 
 func GetCommandCreates() (commands []discord.ApplicationCommandCreate) {
