@@ -9,13 +9,13 @@ var (
 	lowerAlphabet = [ALPHABET_LENGTH]rune{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'}
 )
 
-type CaesarString struct {
+type caesarString struct {
 	originalString *string
 	key            rune
 	encodedString  string
 }
 
-func (s CaesarString) Encoded() (cypheredString string) {
+func (s caesarString) Encoded() string {
 	if len(s.encodedString) < len(*s.originalString) {
 		s.encodedString = caesarCypher(*s.originalString, s.key)
 	}
@@ -35,8 +35,8 @@ func caesarCypher(message string, key rune) string {
 	return cyphered.String()
 }
 
-func NewCaesarString(str string, key int) CaesarString {
-	cs := CaesarString{
+func NewCaesarString(str string, key int) caesarString {
+	cs := caesarString{
 		originalString: &str,
 		key:            rune(key),
 	}
